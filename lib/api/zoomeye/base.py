@@ -14,8 +14,8 @@ class Zoomeye:
 
     def autologin(self):
         try:
-            self.username = 'xxx'
-            self.password = 'xxx'
+            self.username = 'xxxx'
+            self.password = 'xxxx'
         except:
             pass
         if bool(self.username and self.password):
