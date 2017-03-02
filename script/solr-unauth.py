@@ -1,15 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# project = https://github.com/Xyntax/POC-T
-# author = i@cdxy.me
+__author__ = 'luhaoliang'
 
 """
 Apache Solr 未授权访问PoC
   (iterate_path函数使用场景示例)
 
-Usage
-  python POC-T.py -s solr-unauth -iF target.txt
-  python POC-T.py -s solr-unauth -aZ "solr country:cn"
 
 """
 
@@ -36,22 +32,12 @@ def poc(target):
 
 def firefox():
     return 'Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0'
+def get_domain(url):
+    p = urlparse.urlparse(url)
+    return urlparse.urlunsplit([p.scheme, p.netloc, '', '', ''])
 
 def iterate_path(ori_str):
-    """
-    added by cdxy May 8 Sun,2016
 
-    Use:
-    iterate_path_to_list('http://cdxy.me:80/cdsa/cda/aaa.jsp?id=2#')
-
-    Return:
-    ['http://cdxy.me:80/cdsa/cda/aaa.jsp?id=2#',
-     'http://cdxy.me:80/'
-     'http://cdxy.me:80/cdsa',
-     'http://cdxy.me:80/cdsa/cda',
-     'http://cdxy.me:80/cdsa/cda/aaa.jsp']
-
-    """
     parser = urlparse.urlparse(ori_str)
     _path_list = parser.path.replace('//', '/').strip('/').split('/')
     _ans_list = set()
