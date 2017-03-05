@@ -2,7 +2,7 @@ __author__ = 'luhaoliang'
 
 import threading,time,os,imp
 from lib.core.data import paths,cmdLineOptions,conf,eg
-
+from lib.utils.common import TARGET_MODE_STATUS,API_MODE_NAME,ENGINE_MODE_STATUS
 def initEngine():
     eg.module_name = conf.MODULE_NAME
     eg.thread_count = eg.thread_num = conf.THREAD_NUM
@@ -46,15 +46,23 @@ def scan():
 
 def run():
     initEngine()
-    for i in range(eg.thread_num):
-        t = threading.Thread(target=scan,name=str(i))
-        t.daemon = True
-        t.start()
-    while 1:
-        if eg.thread_count > 0:
-            time.sleep(0.01)
-        else:
-            break
+    if conf.ENGINE is ENGINE_MODE_STATUS.THREAD:
+        for i in range(eg.thread_num):
+            t = threading.Thread(target=scan,name=str(i))
+            t.daemon = True
+            t.start()
+        while 1:
+            if eg.thread_count > 0:
+                time.sleep(0.01)
+            else:
+                break
+    elif conf.ENGINE is ENGINE_MODE_STATUS.GEVENT:
+        from gevent import monkey
+        monkey.patch_all()
+        import gevent
+        while eg.queue.qsize() > 0:
+            gevent.joinall([gevent.spawn(scan) for i in xrange(0,eg.thread_num) if eg.queue.qsize() > 0])
+
 
 
 def setThreadLock():

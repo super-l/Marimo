@@ -14,6 +14,12 @@ class TARGET_MODE_STATUS:
     RANGE = 6
     API = 5
 
+
+class ENGINE_MODE_STATUS:
+    THREAD = 9
+    GEVENT = 8
+
+
 class API_MODE_NAME:
     ZOOMEYE = 'zoomeye'
     SHODAN = 'shodan'

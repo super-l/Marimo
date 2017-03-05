@@ -1,7 +1,7 @@
 __author__ = 'luhaoliang'
 
 from lib.core.data import paths,cmdLineOptions,conf,eg
-from lib.utils.common import TARGET_MODE_STATUS,API_MODE_NAME
+from lib.utils.common import TARGET_MODE_STATUS,API_MODE_NAME,ENGINE_MODE_STATUS
 
 import os
 
@@ -13,6 +13,10 @@ def initOptions(args):
     apiRegister(args)
 
 def engineRegister(args):
+    if args.engine_gevent:
+        conf.ENGINE = ENGINE_MODE_STATUS.GEVENT
+    else:
+        conf.ENGINE = ENGINE_MODE_STATUS.THREAD
     conf.THREAD_NUM = args.thread_num
 
 def moduleRegister(args):
