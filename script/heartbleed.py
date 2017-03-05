@@ -1,6 +1,5 @@
 # coding:utf-8
-import re
-import urllib2
+
 
 import struct
 import socket
