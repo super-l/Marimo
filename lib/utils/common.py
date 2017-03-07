@@ -7,6 +7,13 @@ def setPath():
     paths.DATA_PATH = os.path.join(root_path, "data")
     paths.SCRIPT_PATH = os.path.join(root_path, "script")
     paths.OUTPUT_PATH = os.path.join(root_path, "output")
+
+def target2hp(target):
+    l = target.split(':')
+    host = l[0]
+    port = int(l[1])
+    return host,port
+
 class TARGET_MODE_STATUS:
     FILE = 9
     SINGLE = 8

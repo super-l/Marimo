@@ -5,6 +5,7 @@ import struct
 import socket
 import time
 import select
+from lib.utils.common import target2hp
 
 def request2bin(x):
     return x.replace(' ', '').replace('\n', '').decode('hex')
@@ -75,9 +76,7 @@ def send_n_catch_heartbeat(our_socket):
             return False
 
 def check_heardbeat(target):
-    l = target.split(':')
-    host = l[0]
-    port = int(l[1])
+    host,port = target2hp(target)
     sk = (host,port)
 
     local_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
