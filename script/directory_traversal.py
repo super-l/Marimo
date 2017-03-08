@@ -18,7 +18,7 @@ def get_plugin_info():
 
 def poc(target,timeout=3):
     ip,port = target2hp(target)
-    flag = u"web容器任意文件读取漏洞"
+    flag = u"web容器目录遍历漏洞"
     try:
         socket.setdefaulttimeout(timeout)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
