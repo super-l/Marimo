@@ -15,20 +15,21 @@ import urlparse
 
 
 def poc(target):
+    flag = "solr-unauth vulnerable"
     base_url = target if "://" in target else 'http://' + target
     for each in iterate_path(base_url):
         try:
             url = each
             g = requests.get(url, headers={'User-Agent': firefox()})
             if g.status_code is 200 and 'Solr Admin' in g.content and 'Dashboard' in g.content:
-                return [True,'solr']
+                return [1,flag]
             url = url + '/solr/'
             g = requests.get(url, headers={'User-Agent': firefox()})
             if g.status_code is 200 and 'Solr Admin' in g.content and 'Dashboard' in g.content:
-                return [True,'solr']
+                return [1,flag]
         except Exception:
             pass
-    return False
+    return [0,flag]
 
 def firefox():
     return 'Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0'
