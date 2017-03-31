@@ -8,7 +8,7 @@ from common import download
 
 
 
-def link_crawler(seed_url,delay=5,max_url=100,user_agent='wswp',link_regex=None):
+def link_crawler(seed_url,delay=5,max_url=100,user_agent='Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0',link_regex=None):
 
     crawl_queue = [seed_url]
     seen = set(crawl_queue)
@@ -55,4 +55,4 @@ class Throttle:
         self.domains[domain] = datetime.datetime.now()
 
 
-print link_crawler(seed_url="http://ccst.jlu.edu.cn",link_regex='.*',max_url=20)
+# print link_crawler(seed_url="http://ccst.jlu.edu.cn",link_regex='.*',max_url=20)

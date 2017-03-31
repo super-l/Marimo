@@ -11,6 +11,7 @@ def initOptions(args):
     moduleRegister(args)
     targetRegister(args)
     apiRegister(args)
+    scannerRegister(args)
 
 def engineRegister(args):
     if args.engine_gevent:
@@ -22,12 +23,16 @@ def engineRegister(args):
 def moduleRegister(args):
     conf.MODULE_NAME = args.script_name
     conf.SCRIPT_ALL =args.all_script
-
+def scannerRegister(args):
+    conf.SCANNER_NAME = args.scanner_name
 
 def targetRegister(args):
     input_single = args.target_single
     input_file = args.target_file
+    input_crawler = args.target_crawler
+    input_crawler_max_url = args.crawler_max_url
     api_zoomeye = args.zoomeye_dork
+
 
     def file():
         conf.TARGET_MODE = TARGET_MODE_STATUS.FILE
@@ -35,6 +40,11 @@ def targetRegister(args):
     def single():
         conf.TARGET_MODE = TARGET_MODE_STATUS.SINGLE
         conf.TARGET_SINGLE = input_single
+    def crawler():
+        conf.TARGET_MODE = TARGET_MODE_STATUS.CRAWLER
+        conf.TARGET_CRAWLER = input_crawler
+        conf.CRAWLER_MAX_URL = input_crawler_max_url
+
 
     def zoomeye():
         conf.TARGET_MODE = TARGET_MODE_STATUS.API
@@ -45,6 +55,8 @@ def targetRegister(args):
         file()
     elif input_single:
         single()
+    elif input_crawler:
+        crawler()
     elif api_zoomeye:
         zoomeye()
 

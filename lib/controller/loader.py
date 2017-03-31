@@ -5,13 +5,17 @@ __author__ = 'luhaoliang'
 from lib.core.data import paths,cmdLineOptions,conf,eg
 from lib.utils.common import TARGET_MODE_STATUS
 from lib.controller.api import runApi
+from lib.crawler.crawler import link_crawler
 import imp,os,Queue
 
 
-
+def loadScaner():
+    eg.scanner_obj = imp.load_module('_',*imp.find_module(conf.SCANNER_NAME,[paths.SCANNER_PATH]))
 
 def loadModule():
-    if conf.SCRIPT_ALL:
+    if conf.SCANNER_NAME:
+        return
+    elif conf.SCRIPT_ALL:
         loadAllModule()
     else:
         eg.module_obj = imp.load_module('_',*imp.find_module(conf.MODULE_NAME,[paths.SCRIPT_PATH]))
@@ -37,6 +41,8 @@ def loadTarget():
 
     elif conf.TARGET_MODE is TARGET_MODE_STATUS.FILE:
         file_mode()
+    elif conf.TARGET_MODE is TARGET_MODE_STATUS.CRAWLER:
+        crawler_mode()
     elif conf.TARGET_MODE is TARGET_MODE_STATUS.API:
         api_mode()
 
@@ -51,6 +57,14 @@ def file_mode():
         target = line.strip()
         if target:
             eg.queue.put(target)
+
+def crawler_mode():
+    targets = link_crawler(conf.TARGET_CRAWLER,link_regex='.*',max_url=conf.CRAWLER_MAX_URL)
+    for line in targets:
+        target = line.strip()
+        if target:
+            eg.queue.put(target)
+
 def api_mode():
     conf.API_OUTPUT = os.path.join(paths.DATA_PATH, conf.API_MODE)
     if not os.path.exists(conf.API_OUTPUT):

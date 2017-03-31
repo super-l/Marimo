@@ -6,6 +6,7 @@ def setPath():
     root_path = paths.MARIMO_ROOT_PATH
     paths.DATA_PATH = os.path.join(root_path, "data")
     paths.SCRIPT_PATH = os.path.join(root_path, "script")
+    paths.SCANNER_PATH = os.path.join(root_path, "scanner")
     paths.OUTPUT_PATH = os.path.join(root_path, "output")
 
 def target2hp(target):
@@ -20,6 +21,7 @@ class TARGET_MODE_STATUS:
     IPMASK = 7
     RANGE = 6
     API = 5
+    CRAWLER = 4
 
 
 class ENGINE_MODE_STATUS:

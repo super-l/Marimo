@@ -4,6 +4,7 @@ import threading,time,os,imp
 from lib.core.data import paths,cmdLineOptions,conf,eg
 from lib.utils.common import TARGET_MODE_STATUS,API_MODE_NAME,ENGINE_MODE_STATUS
 def initEngine():
+
     eg.module_name = conf.MODULE_NAME
     eg.thread_count = eg.thread_num = conf.THREAD_NUM
     setThreadLock()
@@ -19,7 +20,13 @@ def scan():
             eg.load_lock.release()
             break
 
-        if conf.SCRIPT_ALL:
+        if conf.SCANNER_NAME:
+            try:
+                status,vul = eg.scanner_obj.scan(target)
+                resultHandler(status, vul, target)
+            except:
+                pass
+        elif conf.SCRIPT_ALL:
             for scrip_name in eg.module_list:
                 try:
                     module_obj = imp.load_module('_',*imp.find_module(scrip_name.split('.')[0],[paths.SCRIPT_PATH]))

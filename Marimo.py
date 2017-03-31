@@ -9,7 +9,7 @@ from lib.utils.settings import banner
 from lib.utils.common import setPath
 from lib.core.data import paths,cmdLineOptions,conf,eg
 from lib.controller.controller import run
-from lib.controller.loader import loadModule,loadTarget
+from lib.controller.loader import loadModule,loadTarget,loadScaner
 
 
 
@@ -25,6 +25,7 @@ def main():
     banner()
     loadModule()
     loadTarget()
+    loadScaner()
     run()
 
 
