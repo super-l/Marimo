@@ -30,7 +30,7 @@ def scan(target):
     global g_index
     global cms
 
-    file = paths.DICT_PATH + '/cms.txt'
+    file = paths.DICT_PATH + '/cms'
     f = open(file)
     cms = f.readlines()
     if target.endswith('/'):
