@@ -22,8 +22,7 @@ def scan():
 
         if conf.SCANNER_NAME:
             try:
-                status,vul = eg.scanner_obj.scan(target)
-                resultHandler(status, vul, target)
+                eg.scanner_obj.scan(target)
             except:
                 pass
         elif conf.SCRIPT_ALL:

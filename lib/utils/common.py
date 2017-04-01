@@ -7,6 +7,7 @@ def setPath():
     paths.DATA_PATH = os.path.join(root_path, "data")
     paths.SCRIPT_PATH = os.path.join(root_path, "script")
     paths.SCANNER_PATH = os.path.join(root_path, "scanner")
+    paths.DICT_PATH = os.path.join(root_path, "dict")
     paths.OUTPUT_PATH = os.path.join(root_path, "output")
 
 def target2hp(target):
