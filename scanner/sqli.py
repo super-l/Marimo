@@ -74,7 +74,7 @@ def scan(url, data=None):
         #     print " (x) no usable GET/POST parameters found"
     except KeyboardInterrupt:
         print "\r (x) Ctrl-C pressed"
-    return [retval,flag]
+    return [0,retval,flag]
 
 # def init_options(proxy=None, cookie=None, ua=None, referer=None):
 #     globals()["_headers"] = dict(filter(lambda _: _[1], ((COOKIE, cookie), (UA, ua or NAME), (REFERER, referer))))

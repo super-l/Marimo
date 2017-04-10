@@ -21,4 +21,5 @@ def scan(url):
 
         except:
             pass
+    return [0,0,0]
 

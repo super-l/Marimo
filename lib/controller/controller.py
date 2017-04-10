@@ -22,7 +22,10 @@ def scan():
 
         if conf.SCANNER_NAME:
             try:
-                eg.scanner_obj.scan(target)
+                tag = eg.scanner_obj.scan(target)
+                if tag[0]:
+                    status, vul = tag[1],tag[2]
+                    resultHandler(status, vul, target)
             except:
                 pass
         elif conf.SCRIPT_ALL:

@@ -67,7 +67,7 @@ def scan(target):
                 is_identification = True
                 print "[*] %s 成功识别CMS：%s，匹配的URL：%s，匹配的规则：%s" % (target,cmsname.strip('\n').strip('\r'), url, pattern)
                 break
-    return
+    return [0,0,0]
 
 
 
