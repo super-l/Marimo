@@ -26,6 +26,7 @@ class Interface(cmd.Cmd, PluginManager):
             "help": "帮助菜单",
             "version": "显示Marimo漏洞探测系统概况",
             "list_script": "列出所有内置漏洞探测脚本",
+            "list_scanner": "列出所有内置漏洞扫描脚本",
             "-s [--script]": "加载漏洞探测脚本",
             "-A": "加载所有漏洞探测脚本",
             "-sc [--scanner]": "加载漏洞扫描脚本",

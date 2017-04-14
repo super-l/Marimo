@@ -1,6 +1,7 @@
 __author__ = 'luhaoliang'
 
 import threading,time,os,imp
+from termcolor import colored, cprint
 from lib.core.data import paths,cmdLineOptions,conf,eg
 from lib.utils.common import TARGET_MODE_STATUS,API_MODE_NAME,ENGINE_MODE_STATUS
 def initEngine():
@@ -86,7 +87,7 @@ def changeThreadCount(num):
 
 def resultHandler(status,vul,target):
     if status:
-        print target + " is " + vul
+        cprint(target + " is " + vul,'green')
     else:
         print target + " is not " + vul
 
