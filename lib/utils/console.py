@@ -7,6 +7,7 @@ from lib.utils import logger
 from lib.utils.plugin_manager import PluginManager
 from lib.controller.controller import run
 from lib.controller.loader import loadModule,loadTarget,loadScaner
+from lib.core.data import paths,cmdLineOptions,conf,eg
 
 
 
@@ -89,6 +90,24 @@ class Interface(cmd.Cmd, PluginManager):
         loadTarget()
         loadScaner()
         run()
+
+    def do_set(self, arg):
+        """
+        设置参数
+        :param arg: string, 以空格分割 option, value
+        :return:
+        """
+
+        if len(arg.split()) == 2:
+            option = arg.split()[0]
+            value = arg.split()[1]
+            if option == "script":
+                conf.MODULE_NAME = value
+            elif option == "scanner":
+                conf.SCANNER_NAME = value
+
+        else:
+            logger.error("set <option> <value>")
 
 
     def do_shell(self, arg):
